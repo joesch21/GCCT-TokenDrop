@@ -1,0 +1,51 @@
+/* App.css */
+body {
+    background-image: url('/public/IMG_3402_s.PNG');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+
+/* App.css */
+.gold-text {
+    color: #FFD700; /* Standard gold color */
+  }
+  
+h1, h2, h3 {
+    color: #FFD700;
+  }
+  
+/* App.css */
+
+/* Style for the main container with a dark grey background */
+.container {
+  background-color: #2f2f2f; /* Dark grey background */
+  color: white; /* Ensure text is readable on the dark background */
+  padding: 20px; /* Add padding around the content */
+  border-radius: 10px; /* Smooth rounded edges */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4); /* Add shadow for depth */
+  margin-top: 20px; /* Add spacing above the container */
+}
+
+/* Gold text styling */
+.gold-text {
+  color: #ffcc00; /* Gold color */
+  text-align: left; /* Center the heading */
+}
+
+/* General button spacing */
+.btn {
+  margin-top: 10px; /* Add spacing above the buttons */
+}
+
+/* Specific style for sections like Faucet and Airdrop */
+.section-frame {
+  background-color: #444444; /* Slightly lighter grey for sections */
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px; /* Space between sections */
+}
+

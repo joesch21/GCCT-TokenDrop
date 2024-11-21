@@ -15,12 +15,14 @@ function App() {
   const connectWallet = async () => {
     if (window.ethereum) {
       try {
+        // Request accounts from MetaMask
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         setAccount(accounts[0]);
 
+        // Get balance for the connected account
         const provider = new BrowserProvider(window.ethereum);
-        const balance = await provider.getBalance(accounts[0]);
-        setBalance(formatEther(balance));
+        const userBalance = await provider.getBalance(accounts[0]);
+        setBalance(formatEther(userBalance));
       } catch (error) {
         console.error('Error connecting to MetaMask:', error);
       }
@@ -31,13 +33,16 @@ function App() {
 
   return (
     <div>
+      {/* Navigation Bar */}
       <NavigationBar />
       <div className="container mt-4 px-3">
         <h1 className="gold-text text-center">Welcome to the GCC Gimp Game</h1>
+
+        {/* Wallet Connection Section */}
         {account ? (
           <div className="text-center">
-            <p>Connected Account: {account}</p>
-            <p>Balance: {balance} ETH</p>
+            <p>Connected Account: <strong>{account}</strong></p>
+            <p>Balance: <strong>{balance}</strong> ETH</p>
           </div>
         ) : (
           <div className="d-flex justify-content-center">
@@ -47,14 +52,17 @@ function App() {
           </div>
         )}
 
+        {/* Network Setup Section */}
         <div id="network" className="section-frame mt-5">
           <NetworkSetup />
         </div>
 
+        {/* Faucet Section */}
         <div id="faucet" className="section-frame mt-5">
           <Faucet />
         </div>
 
+        {/* Airdrop Section */}
         <div id="airdrop" className="section-frame mt-5">
           <h2 className="gold-text">3. Claim Airdrop</h2>
           <p>Once you have Test BNB, claim your GCC tokens to start playing.</p>

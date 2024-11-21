@@ -14,7 +14,10 @@
   "license": "ISC",
   "description": "A token claim app built with React and Webpack.",
   "dependencies": {
+    "@web3-onboard/core": "^2.23.0",
+    "@web3-onboard/metamask": "^2.2.0",
     "bootstrap": "^5.3.3",
+    "dotenv": "^16.4.5",
     "ethers": "^6.13.4",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.5",
@@ -33,8 +36,7 @@
     "html-webpack-plugin": "^5.6.3"
   },
   "engines": {
-  "node": ">=18 <21",
-  "npm": ">=8.0.0"
+    "node": ">=18 <21",
+    "npm": ">=8.0.0"
   }
-
 }

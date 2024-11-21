@@ -1,6 +1,5 @@
-// src/App.js
 import React, { useState } from 'react';
-import { BrowserProvider, formatEther } from 'ethers';
+import { ethers } from 'ethers';
 import NavigationBar from './components/NavigationBar';
 import ClaimButton from './components/ClaimButton';
 import NetworkSetup from './components/NetworkSetup';
@@ -11,6 +10,10 @@ import './App.css';
 function App() {
   const [account, setAccount] = useState(null);
   const [balance, setBalance] = useState(null);
+  const [blockNumber, setBlockNumber] = useState(null);
+
+  const INFURA_URL = `https://bsc-testnet.infura.io/v3/${process.env.REACT_APP_INFURA_PROJECT_ID}`;
+  const infuraProvider = new ethers.providers.JsonRpcProvider(INFURA_URL);
 
   const connectWallet = async () => {
     if (window.ethereum) {
@@ -20,14 +23,23 @@ function App() {
         setAccount(accounts[0]);
 
         // Get balance for the connected account
-        const provider = new BrowserProvider(window.ethereum);
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
         const userBalance = await provider.getBalance(accounts[0]);
-        setBalance(formatEther(userBalance));
+        setBalance(ethers.utils.formatEther(userBalance));
       } catch (error) {
         console.error('Error connecting to MetaMask:', error);
       }
     } else {
       alert('MetaMask is not installed. Please install it to use this app.');
+    }
+  };
+
+  const getLatestBlock = async () => {
+    try {
+      const latestBlock = await infuraProvider.getBlockNumber();
+      setBlockNumber(latestBlock);
+    } catch (error) {
+      console.error('Error fetching block number:', error);
     }
   };
 
@@ -42,7 +54,7 @@ function App() {
         {account ? (
           <div className="text-center">
             <p>Connected Account: <strong>{account}</strong></p>
-            <p>Balance: <strong>{balance}</strong> ETH</p>
+            <p>Balance: <strong>{balance}</strong> BNB</p>
           </div>
         ) : (
           <div className="d-flex justify-content-center">
@@ -51,6 +63,16 @@ function App() {
             </button>
           </div>
         )}
+
+        {/* Fetch Block Number Section */}
+        <div className="mt-4 text-center">
+          <button className="btn btn-secondary" onClick={getLatestBlock}>
+            Get Latest Block (Infura)
+          </button>
+          {blockNumber !== null && (
+            <p>Latest Block Number: <strong>{blockNumber}</strong></p>
+          )}
+        </div>
 
         {/* Network Setup Section */}
         <div id="network" className="section-frame mt-5">

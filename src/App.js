@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { JsonRpcProvider, BrowserProvider, formatEther } from 'ethers';
 import NavigationBar from './components/NavigationBar';
 import ClaimButton from './components/ClaimButton';
@@ -10,9 +10,18 @@ function App() {
   const [account, setAccount] = useState(null);
   const [balance, setBalance] = useState(null);
   const [blockNumber, setBlockNumber] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   const INFURA_URL = `https://bsc-testnet.infura.io/v3/${process.env.REACT_APP_INFURA_PROJECT_ID}`;
   const infuraProvider = new JsonRpcProvider(INFURA_URL);
+
+  // Detect if the user is on a mobile device
+  useEffect(() => {
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    if (/android|iPad|iPhone|iPod/.test(userAgent.toLowerCase())) {
+      setIsMobile(true);
+    }
+  }, []);
 
   // Function to connect wallet using MetaMask
   const connectWallet = async () => {
@@ -55,7 +64,7 @@ function App() {
     <div>
       <NavigationBar />
       <div className="container mt-4 px-3">
-        <h1 className="gold-text text-center">Welcome to the GCC Gimp Game</h1>
+        <h1 className="gold-text text-center">Welcome to the GCC GIMP Game</h1>
 
         {/* Wallet Connection Section */}
         <div className="text-center">
@@ -69,6 +78,37 @@ function App() {
               <button className="btn btn-primary" onClick={connectWallet}>
                 Connect MetaMask
               </button>
+            </div>
+          )}
+        </div>
+
+        {/* Mobile/Browser Message */}
+        <div className="mt-4 text-center">
+          {!isMobile && (
+            <div
+              style={{
+                backgroundColor: "#f8d7da",
+                color: "#721c24",
+                padding: "15px",
+                borderRadius: "5px",
+                border: "1px solid #f5c6cb",
+              }}
+            >
+              <p>
+                For the best experience, please open this app in the{" "}
+                <strong>MetaMask Browser</strong> on mobile devices.
+              </p>
+              <p>
+                Download MetaMask{" "}
+                <a
+                  href="https://metamask.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  here
+                </a>
+                .
+              </p>
             </div>
           )}
         </div>

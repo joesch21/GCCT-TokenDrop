@@ -4,14 +4,14 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack serve --mode development --open",
-    "build": "webpack --mode production",
+    "build": "node ./node_modules/webpack/bin/webpack.js --mode production",
     "lint": "eslint src/**/*.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "A token claim app built with React and Webpack.",
   "dependencies": {
     "bootstrap": "^5.3.3",
     "ethers": "^6.13.4",
@@ -32,6 +32,7 @@
     "html-webpack-plugin": "^5.6.3"
   },
   "engines": {
-    "node": ">=14 <18"
+    "node": ">=14 <18",
+    "npm": ">=6.0.0"
   }
 }

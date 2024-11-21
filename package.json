@@ -16,6 +16,7 @@
   "dependencies": {
     "@web3-onboard/core": "^2.23.0",
     "@web3-onboard/metamask": "^2.2.0",
+    "@web3-onboard/walletconnect": "^2.6.1",
     "bootstrap": "^5.3.3",
     "dotenv": "^16.4.5",
     "ethers": "^6.13.4",
